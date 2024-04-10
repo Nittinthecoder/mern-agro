@@ -200,9 +200,8 @@ function Header({ children }) {
                     </Dropdown.Item>
                     <Dropdown.Separator />
                     <div className="flex flex-col px-2 py-3">
-                      <Link className="mb-2"> Your profile</Link>
-                      <Link className="mb-2">Your stars</Link>
-                      <Link className="" onClick={handleLogout}>
+                      <Link to="/userdashboard" className="mb-2"> Your profile</Link>
+                      <Link to="" className="" onClick={handleLogout}>
                         Sign out
                       </Link>
                     </div>
