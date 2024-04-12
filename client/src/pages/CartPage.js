@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout/Layout";
@@ -174,7 +176,7 @@ const CartPage = () => {
                     className="font-medium text-text animate-bounce hover:text-primary"
                   >
                     Continue Shopping
-                    <span aria-hidden="true"> &rarr;</span>
+                    <span aria-hidden="true"> </span>
                   </button>
                 </Link>
               </p>
