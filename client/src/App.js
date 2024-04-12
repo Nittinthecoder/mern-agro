@@ -17,11 +17,10 @@ import Orders from "./pages/User/Orders";
 import Profile from "./pages/User/Profile";
 import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
-import { useState } from "react";
+
 import Chat from "./Chat";
 
 function App() {
-  const [user, setUser] = useState(undefined);
   return (
     <>
       <Routes>
