@@ -1,7 +1,7 @@
-import { Button, ButtonToolbar, FlexboxGrid, Heading } from "rsuite";
-import { Link } from "react-router-dom";
+import { Heading } from "rsuite";
 
 import Layout from "../../components/Layout/Layout";
+import UserMenu from "../../components/Layout/UserMenu";
 
 export default function UserDashboard() {
   return (
@@ -10,30 +10,9 @@ export default function UserDashboard() {
         <Heading className="relative top-[-3rem] text-xl left-[9rem]">
           USER DASHBOARD
         </Heading>
-        <FlexboxGrid className="absolute left-[10rem]" justify="space-around">
-          <FlexboxGrid.Item>
-            <div>
-              <ButtonToolbar className="flex flex-col">
-                <Button color="green" appearance="ghost">
-                  <Link>PROFILE</Link>
-                </Button>
-                <Button color="green" appearance="ghost">
-                  <Link></Link>
-                </Button>
-                <Button color="green" appearance="ghost">
-                  <Link>VIEW PRODUCTS</Link>
-                </Button>
-              </ButtonToolbar>
-            </div>
-          </FlexboxGrid.Item>
-          <FlexboxGrid.Item>
-            <div className="absolute top-[36rem] left-3">
-              <Button color="cyan" appearance="primary">
-                Setting
-              </Button>
-            </div>
-          </FlexboxGrid.Item>
-        </FlexboxGrid>
+        <div className="mt-[-.8rem]">
+          <UserMenu />
+        </div>
       </div>
     </Layout>
   );

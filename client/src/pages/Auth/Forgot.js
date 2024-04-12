@@ -1,49 +1,36 @@
-/* eslint-disable no-unused-vars */
-import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Button, ButtonGroup, ButtonToolbar, Text } from "rsuite";
-// import { input } from "rsuite";
-
+import React, { useState } from "react";
+import { Button, Text } from "rsuite";
+import { Link, useNavigate } from "react-router-dom";
+import Layout from "../../components/Layout/Layout";
+import { toast } from "sonner";
 import axios from "axios";
 
-import Layout from "../../components/Layout/Layout";
-import { useAuth } from "../../context/auth";
-import toast from "react-hot-toast";
-// import { toast } from "sonner";
-// import { toast } from "react-toastify";
-// import toast from "react-hot-toast";
-
-export function Login() {
+const Forgot = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [auth, setAuth] = useAuth();
+  const [answer, setAnswer] = useState("");
+  const [newPassword, setNewPassword] = useState("");
 
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // form fun for login
+  // form function for forgot password
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/v1/auth/login", {
+      const res = await axios.post("/api/v1/auth/forgot-password", {
         email,
-        password,
+        newPassword,
+        answer,
       });
       if (res && res.data.success) {
-        // toast.success(res.data && res.data.message);
-        setAuth({
-          ...auth,
-          user: res.data.user,
-          token: res.data.token,
-        });
-        localStorage.setItem("auth", JSON.stringify(res.data));
-        navigate(location.state || "/");
+        toast.success(res.data && res.data.message);
+
+        navigate("/login");
       } else {
-        // toast.error(res.data.message);
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      // toast.error("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
@@ -58,7 +45,7 @@ export function Login() {
               alt="Your Company"
             />
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
+              Reset your Acc Password
             </h2>
           </div>
 
@@ -79,28 +66,25 @@ export function Login() {
 
               <div>
                 <div className="flex mt-[-1rem] items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  ></label>
-                  <div className="text-sm">
-                    <ButtonGroup size="xs">
-                      <Button
-                        color="green"
-                        appearance="ghost"
-                        className="font-semibold text-secondary hover:text-black"
-                      >
-                        <Link to="/forgot">Forgot password</Link>
-                      </Button>
-                    </ButtonGroup>
-                  </div>
+                  
+                  <div className="text-sm"></div>
+                </div>
+                <div className="mt-3">
+                  <input
+                    id="answer"
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    placeholder="Type in the answer which was asked during registeration"
+                    type="text"
+                    className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  />
                 </div>
                 <div className="mt-3">
                   <input
                     id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="New Password"
                     type="password"
                     className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
                   />
@@ -114,18 +98,18 @@ export function Login() {
                   type="submit"
                   className="flex w-full justify-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:text-text focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                 >
-                  Sign in
+                  RESET PASSWORD
                 </Button>
               </div>
             </form>
 
-            <p className="mt-10 ml-[3.5rem] text-center flex flex-row text-sm text-text">
-              Not a member?{" "}
+            <p className="mt-10 ml-[5rem] text-center flex flex-row text-sm text-text">
+              Already a member?{" "}
               <Link
-                to="/register"
-                className="font-semibold ml-3  leading-6 text-secondary hover:text-lime-500"
+                to="/login"
+                className="font-semibold ml-[1rem] mt-[.1rem]  leading-6 text-secondary hover:text-lime-500"
               >
-                <Text color="green">Create your Account</Text>
+                <Text color="green">SIGN IN</Text>
               </Link>
             </p>
           </div>
@@ -133,4 +117,6 @@ export function Login() {
       </Layout>
     </>
   );
-}
+};
+
+export default Forgot;

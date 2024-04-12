@@ -8,8 +8,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
-import { useToaster } from "rsuite";
-
 import "rsuite/dist/rsuite-no-reset.min.css";
 
 import { Dropdown, Avatar } from "rsuite";
@@ -43,10 +41,10 @@ function Header({ children }) {
       token: "",
     });
     localStorage.removeItem("auth");
-    toaster.success("Logout Successfully");
+    // toaster.success("Logout Successfully");
   };
 
-  const toaster = useToaster();
+  // const toaster = useToaster();
 
   const [open, setOpen] = useState(false);
   return (
@@ -168,7 +166,9 @@ function Header({ children }) {
 
               <div className="">
                 {navigation.map((item) => (
-                  <Link className="ml-4">{item.name}</Link>
+                  <Link to={item.link} className="ml-4">
+                    {item.name}
+                  </Link>
                 ))}
               </div>
 
@@ -200,7 +200,18 @@ function Header({ children }) {
                     </Dropdown.Item>
                     <Dropdown.Separator />
                     <div className="flex flex-col px-2 py-3">
-                      <Link to="/userdashboard" className="mb-2"> Your profile</Link>
+                      {auth?.user?.role === 0 && (
+                        <Link to="/userdashboard" className="mb-2">
+                          {" "}
+                          Your profile
+                        </Link>
+                      )}
+                      {auth?.user?.role === 1 && (
+                        <Link to="/admindashboard" className="mb-2">
+                          {" "}
+                          Your profile
+                        </Link>
+                      )}
                       <Link to="" className="" onClick={handleLogout}>
                         Sign out
                       </Link>
