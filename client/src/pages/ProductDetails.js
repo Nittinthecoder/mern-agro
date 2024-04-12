@@ -2,14 +2,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Layout from "../components/Layout/Layout";
-
+import { useCart } from "../context/cart";
 import { RadioGroup } from "@headlessui/react";
 
 import { Button, Text } from "rsuite";
-import { Bars3BottomRightIcon } from "@heroicons/react/24/outline";
 import Bargain from "./Bargain";
 
 const products = {
@@ -31,7 +30,7 @@ function classNames(...classes) {
 
 const ProductDetails = () => {
   const params = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [selectedSize, setSelectedSize] = useState(products.sizes[1]);
 
@@ -64,18 +63,18 @@ const ProductDetails = () => {
         </div>
         <div className="relative left-[-22rem] lg:border-l p-4">
           <div className="ml-[3rem]">
-            <Text as="b" weight="900" size="2rem" color="green">
+            <Text as="b"  size="2rem" color="green">
               {product.name}
             </Text>
             <div className="lg:col-span-2 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                <Text as="b" weight="500" size="xxl">
+                <Text as="b"  size="xxl">
                   Stock : {product.quantity}
                 </Text>
               </h1>
               <div className="flex flex-col lg:py-4 ">
                 <div className="py-2 mb-[2rem] max-w-[30rem] ">
-                  <Text weight="500" size="xxl">
+                  <Text  size="xxl">
                     {product.description}
                   </Text>
                 </div>
@@ -83,7 +82,7 @@ const ProductDetails = () => {
                   <p>{product.detail}</p>
                 </div>
                 <div className="py-2 max-w-[30rem] ">
-                  <Text as="b" weight="900" size="2rem">
+                  <Text as="b"  size="2rem">
                     Rs {product.price}
                   </Text>
                 </div>
@@ -123,7 +122,7 @@ const ProductDetails = () => {
                               </RadioGroup.Label>
                               {size.inStock ? (
                                 <span
-                                  cassName={classNames(
+                                  className={classNames(
                                     active ? "border" : "border-2",
                                     checked
                                       ? "border-black"
@@ -160,11 +159,16 @@ const ProductDetails = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                {/* <div>
+                <div>
                   <Bargain />
-                </div> */}
+                </div>
                 <div className="py-2 max-w-[30rem] relative top-[5rem] ">
-                  <Button size="lg" appearance="primary" color="green">
+                  <Button
+                    // onClick={handle}
+                    size="lg"
+                    appearance="primary"
+                    color="green"
+                  >
                     Add To Cart
                   </Button>
                 </div>

@@ -16,8 +16,12 @@ import UpdateProduct from "./pages/Admin/UpdateProduct";
 import Orders from "./pages/User/Orders";
 import Profile from "./pages/User/Profile";
 import ProductDetails from "./pages/ProductDetails";
+import CartPage from "./pages/CartPage";
+import { useState } from "react";
+import Chat from "./Chat";
 
 function App() {
+  const [user, setUser] = useState(undefined);
   return (
     <>
       <Routes>
@@ -25,9 +29,11 @@ function App() {
         <Route path="/pro-details/:slug" element={<ProductDetails />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/chat-auth" element={<Chat />} />
         {/* <Route path="/forgot-password" element={<ForgotPasswordPage />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
+        <Route path="/cart" element={<CartPage />} />
 
         {/* user routes */}
         <Route path="/userdashboard" element={<PrivateRoute />}>
@@ -39,10 +45,19 @@ function App() {
         {/* admin routes */}
         <Route path="/admindashboard" element={<AdminRoute />}>
           <Route path="" element={<AdminDashboard />} />
-          <Route path="/admindashboard/create-cate" element={<CreateCategory />} />
-          <Route path="/admindashboard/create-pro" element={<CreateProduct />} />
+          <Route
+            path="/admindashboard/create-cate"
+            element={<CreateCategory />}
+          />
+          <Route
+            path="/admindashboard/create-pro"
+            element={<CreateProduct />}
+          />
           <Route path="/admindashboard/view-pro" element={<ViewProduct />} />
-          <Route path="/admindashboard/update-pro/:slug" element={<UpdateProduct />} />
+          <Route
+            path="/admindashboard/update-pro/:slug"
+            element={<UpdateProduct />}
+          />
           <Route path="/admindashboard/admin-set" element={<AdminSet />} />
         </Route>
       </Routes>
