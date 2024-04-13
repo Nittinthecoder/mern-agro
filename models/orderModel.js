@@ -1,4 +1,3 @@
-
 import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema(
@@ -16,8 +15,8 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      default: "Not Process",
-      enum: ["Not Process", "Processing", "Shipped", "deliverd", "cancel"],
+      default: "Pending",
+      enum: ["Pending", "Processing", "Shipped", "Deliverd", "Cancel"],
     },
   },
   { timestamps: true }

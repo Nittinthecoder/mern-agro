@@ -1,22 +1,150 @@
-import React from 'react'
-import Layout from '../../components/Layout/Layout'
-import UserMenu from '../../components/Layout/UserMenu'
+/* eslint-disable jsx-a11y/alt-text */
+import React, { useEffect, useState } from "react";
+import Layout from "../../components/Layout/Layout";
+import UserMenu from "../../components/Layout/UserMenu";
+import moment from "moment";
+import { FlexboxGrid, Heading } from "rsuite";
+import axios from "axios";
+import { useAuth } from "../../context/auth";
+
+import { Table, Button } from "rsuite";
+const { Column, HeaderCell, Cell } = Table;
 
 const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [auth] = useAuth();
+  const getOrders = async () => {
+    try {
+      const { data } = await axios.get("/api/v1/auth/orders");
+      setOrders(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (auth?.token) getOrders();
+  }, [auth?.token]);
+
   return (
     <Layout title={"Your Orders"}>
-      <div className="container-flui p-3 m-3">
-        <div className="row">
-          <div className="col-md-3">
-            <UserMenu />
-          </div>
-          <div className="col-md-9">
-            <h1>All Orders</h1>
+      {/* <Toaster /> */}
+      <div className="absolute top-[10rem]">
+        <Heading className="relative top-[-3rem] text-xl left-[9rem]">
+          YOUR ORDERS
+        </Heading>
+        <div className="relative">
+          <FlexboxGrid justify="space-around">
+            <FlexboxGrid.Item>
+              <UserMenu />
+            </FlexboxGrid.Item>
+            <div className="absolute top-[-3rem] left-[30rem]">
+              <FlexboxGrid.Item>
+                <h1>ALL ORDERS</h1>
+
+                <div className="w-[60rem]">
+                  <div className="overflow-x-auto">
+                    <div className="  flex items-center justify-center  font-sans overflow-hidden">
+                      <div className="w-full ">
+                        <div className=" shadow-md rounded my-6">
+                          <table className=" w-[60rem] table-auto">
+                            <thead>
+                              <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th className="py-3 px-6 text-left">#</th>
+                                <th className="py-3 px-6 text-left">Items</th>
+                                <th className="py-3 px-6 text-left">Buyer</th>
+                                <th className="py-3 px-6 text-center">Date</th>
+                                <th className="py-3 px-6 text-center">Date</th>
+                                <th className="py-3 px-6 text-center">
+                                  Statue
+                                </th>
+                                <th className="py-3 px-6 text-center">
+                                  Quantity
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody className="text-gray-600 text-sm font-light">
+                              {orders.map((o, i) => {
+                                return (
+                                  <tr className="border-b border-gray-200 hover:bg-gray-100">
+                                    <td className="py-3 px-6 text-left whitespace-nowrap">
+                                      <div className="flex items-center">
+                                        <span className="font-medium">
+                                          {i + 1}
+                                        </span>
+                                      </div>
+                                    </td>
+                                    <td className="py-3 px-6 text-left">
+                                      <div className="flex items-center">
+                                        {o?.products?.map((p, i) => {
+                                          return (
+                                            <div>
+                                              <div className="mr-1">
+                                                <img 
+                                                  className="h-10 w-10 rounded-full"
+                                                  src={`/api/v1/product/product-photo/${p._id}`}
+                                                  alt={p.name}
+                                                />
+                                              </div>
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                    </td>
+                                    <td className="py-3 px-6 text-left">
+                                      <div className="flex items-center">
+                                        <span>{o?.buyer?.name}</span>
+                                      </div>
+                                    </td>
+                                    <td className="py-3 px-6 text-center">
+                                      <div className="flex items-center justify-center">
+                                        <span>
+                                          {moment(o?.createAt).fromNow()}
+                                        </span>
+                                      </div>
+                                    </td>
+                                    <td className="py-3 px-6 text-center">
+                                      <div className="flex items-center justify-center">
+                                        <span>
+                                          {o?.payment?.success
+                                            ? "Success"
+                                            : "Failed"}
+                                        </span>
+                                      </div>
+                                    </td>
+                                    <td className="py-3 px-6 text-center">
+                                      <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                                        {o?.status}
+                                      </span>
+                                    </td>
+                                    <td className="py-3 px-6 text-center">
+                                      <div className="flex item-center justify-center">
+                                        <span>{o?.products?.length}</span>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </FlexboxGrid.Item>
+            </div>
+          </FlexboxGrid>
+          <div>
+            <FlexboxGrid
+              className="relative"
+              justify="space-around"
+            ></FlexboxGrid>
           </div>
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;

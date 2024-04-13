@@ -11,10 +11,12 @@ import {
 import "rsuite/dist/rsuite-no-reset.min.css";
 
 import { Dropdown, Avatar } from "rsuite";
+import { Badge } from "antd";
 
 import { Link } from "react-router-dom";
 // import { toast } from "sonner";
 import { useAuth } from "../../context/auth";
+import { useCart } from "../../context/cart";
 
 const navigation = [{ name: "Products", link: "/", user: true }];
 
@@ -33,6 +35,7 @@ const renderToggle = (props) => (
 
 function Header({ children }) {
   const [auth, setAuth] = useAuth();
+  const [cart] = useCart();
 
   const handleLogout = () => {
     setAuth({
@@ -240,7 +243,7 @@ function Header({ children }) {
                       />
                     </Link>
                     <span className="ml-2 text-sm font-medium text-primary group-hover:text-secondary">
-                      1
+                    <Badge color="green" count={cart?.length} showZero></Badge>
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>

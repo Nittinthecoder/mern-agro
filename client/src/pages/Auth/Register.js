@@ -17,6 +17,9 @@ export function Register() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [answer, setAnswer] = useState("");
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [pinCode, setPinCode] = useState("");
 
   const navigate = useNavigate();
 
@@ -30,6 +33,9 @@ export function Register() {
         password,
         phone,
         answer,
+        address,
+        state,
+        pinCode,
       });
       if (res.data.success) {
         toast.success(res.data.message);
@@ -132,6 +138,45 @@ export function Register() {
                     value={answer}
                     onChange={(e) => setAnswer(e.target.value)}
                     placeholder="What is Your Favorite Food"
+                    required
+                    type="text"
+                    className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="mt-2">
+                  <input
+                    id="address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Enter Your Address"
+                    required
+                    type="text"
+                    className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="mt-2">
+                  <input
+                    id="state"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    placeholder="Enter Your State Name"
+                    required
+                    type="text"
+                    className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="mt-2">
+                  <input
+                    id="state"
+                    value={pinCode}
+                    onChange={(e) => setPinCode(e.target.value)}
+                    placeholder="Enter Your PinCode"
                     required
                     type="text"
                     className="block p-2 w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6"

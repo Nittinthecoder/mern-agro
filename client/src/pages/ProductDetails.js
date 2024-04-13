@@ -10,6 +10,7 @@ import { RadioGroup } from "@headlessui/react";
 
 import { Button, Text } from "rsuite";
 import Bargain from "./Bargain";
+import toast from "react-hot-toast";
 
 const products = {
   sizes: [
@@ -33,6 +34,7 @@ const ProductDetails = () => {
   // const navigate = useNavigate();
   const [product, setProduct] = useState({});
   const [selectedSize, setSelectedSize] = useState(products.sizes[1]);
+  const [cart, setCart] = useCart();
 
   //getProduct
   const getProduct = async () => {
@@ -63,26 +65,24 @@ const ProductDetails = () => {
         </div>
         <div className="relative left-[-22rem] lg:border-l p-4">
           <div className="ml-[3rem]">
-            <Text as="b"  size="2rem" color="green">
+            <Text as="b" size="2rem" color="green">
               {product.name}
             </Text>
             <div className="lg:col-span-2 lg:pr-8">
               <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                <Text as="b"  size="xxl">
+                <Text as="b" size="xxl">
                   Stock : {product.quantity}
                 </Text>
               </h1>
               <div className="flex flex-col lg:py-4 ">
                 <div className="py-2 mb-[2rem] max-w-[30rem] ">
-                  <Text  size="xxl">
-                    {product.description}
-                  </Text>
+                  <Text size="xxl">{product.description}</Text>
                 </div>
                 <div className="py-2 max-w-[30rem] ">
                   <p>{product.detail}</p>
                 </div>
                 <div className="py-2 max-w-[30rem] ">
-                  <Text as="b"  size="2rem">
+                  <Text as="b" size="2rem">
                     Rs {product.price}
                   </Text>
                 </div>
@@ -164,7 +164,14 @@ const ProductDetails = () => {
                 </div>
                 <div className="py-2 max-w-[30rem] relative top-[5rem] ">
                   <Button
-                    // onClick={handle}
+                    onClick={() => {
+                      setCart([...cart, product]);
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, product])
+                      );
+                      toast.success("Product Added to Cart");
+                    }}
                     size="lg"
                     appearance="primary"
                     color="green"

@@ -19,6 +19,7 @@ import ProductDetails from "./pages/ProductDetails";
 import CartPage from "./pages/CartPage";
 
 import Chat from "./Chat";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/checkout" element={<Checkout />} />
 
         {/* user routes */}
         <Route path="/userdashboard" element={<PrivateRoute />}>

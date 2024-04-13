@@ -24,6 +24,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: {},
+      required: true,
+    },
+    state: {
+      type: {},
+      required: true,
+    },
+    pinCode: {
+      type: Number,
+      // required: true,
+    },
     role: {
       type: Number,
       default: 0,

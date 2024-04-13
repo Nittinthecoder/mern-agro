@@ -1,55 +1,102 @@
+<div className="mx-auto  bg-background max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="border-t border-primary px-4 py-6 sm:px-6">
+              <h1 className="text-4xl my-5 font-bold tracking-tight text-gray-900">
+                Cart
+              </h1>
+              <div className="flow-root">
+                <ul role="list" className="-my-6 divide-y divide-primary">
+                  {/* {items.map((item) => ( */}
+                  <li
+                    // key={item.id}
+                    className="flex py-6"
+                  >
+                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-primary">
+                      {/* <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                        className="h-full w-full object-cover object-center"
+                      /> */}
+                    </div>
 
-DeprecationWarning Solution:
+                    <div className="ml-4 flex flex-1 flex-col">
+                      <div>
+                        <div className="flex justify-between text-base font-medium text-gray-900">
+                          <h3>{/* <a href={item.href}>{item.title}</a> */}</h3>
+                          {/* <p className="ml-4">${item.price}</p> */}
+                        </div>
+                        <p className="mt-1 text-sm text-gray-500">
+                          {/* {item.brand} */}
+                        </p>
+                      </div>
+                      <div className="flex flex-1 items-end justify-between text-sm">
+                        <div className="text-gray-500">
+                          <label
+                            htmlFor="quantity"
+                            className="inline mr-5 text-sm font-medium leading-6 text-gray-900"
+                          >
+                            Qty
+                          </label>
+                          <select
+                          // onChange={(e) => handleQuantity(e, item)}
+                          // value={item.quantity}
+                          >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </div>
 
-(node:2772) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 
-'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option. 
-(Use `node --trace-deprecation ...` to show where the warning was created) (node:2772) 
-[DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 
-'onBeforeSetupMiddleware'option is deprecated. Please use the 'setupMiddlewares' option.
+                        <div className="flex">
+                          <button
+                            // onClick={(e) => handleRemove(e, item.id)}
+                            type="button"
+                            className="font-medium text-primary hover:scale-x-95"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  {/* ))} */}
+                </ul>
+              </div>
+            </div>
 
-Follow this:
-Go React Project file(my-app)> node_modile>react-scripts>config>webpackDevServer.config.js>then change this way:
-
-Error code like this:
-onBeforeSetupMiddleware(devServer) {
-    // Keep `evalSourceMapMiddleware`
-    // middlewares before `redirectServedPath` otherwise will not have any effect
-    // This lets us fetch source contents from webpack for the error overlay
-    devServer.app.use(evalSourceMapMiddleware(devServer));
-
-    if (fs.existsSync(paths.proxySetup)) {
-    // This registers user provided middleware for proxy reasons
-    require(paths.proxySetup)(devServer.app);
-    }
-},
-onAfterSetupMiddleware(devServer) {
-    // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match
-    devServer.app.use(redirectServedPath(paths.publicUrlOrPath));
-
-    // This service worker file is effectively a 'no-op' that will reset any
-    // previous service worker registered for the same host:port combination.
-    // We do this in development to avoid hitting the production cache if
-    // it used the same host and port.
-    // https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
-    devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
-},
-
-Change to this: 
-
-setupMiddlewares: (middlewares, devServer) => {
-    if (!devServer) {
-        throw new Error('webpack-dev-server is not defined')
-    }
-
-    if (fs.existsSync(paths.proxySetup)) {
-        require(paths.proxySetup)(devServer.app)
-    }
-
-    middlewares.push(
-        evalSourceMapMiddleware(devServer),
-        redirectServedPath(paths.publicUrlOrPath),
-        noopServiceWorkerMiddleware(paths.publicUrlOrPath)
-    )
-
-    return middlewares;
-},
+            <div className="border-t border-primary px-4 py-6 sm:px-6">
+              <div className="flex justify-between my-2 text-base font-medium text-gray-900">
+                <p>Subtotal</p>
+                {/* <p>Rs {totalAmount} </p> */}
+              </div>
+              <div className="flex justify-between my-2 text-base font-medium text-gray-900">
+                <p>Total Items in Cart</p>
+                {/* <p> {totalItems} items</p> */}
+              </div>
+              <p className="mt-0.5 text-sm text-gray-500">
+                Shipping and taxes calculated at checkout.
+              </p>
+              <div className="mt-6">
+                <Link
+                  to="/checkout"
+                  className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:text-text"
+                >
+                  Checkout
+                </Link>
+              </div>
+              <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
+                <p>
+                  <Link to="/">
+                    <button
+                      type="button"
+                      className="font-medium text-text animate-bounce hover:text-primary"
+                    >
+                      Continue Shopping
+                      <span aria-hidden="true"> </span>
+                    </button>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>

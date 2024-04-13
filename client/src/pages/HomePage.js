@@ -316,7 +316,7 @@ function ProductGrid({ products, setPage, page, total, loading }) {
           ))}
           <div>
             <div className="m-2 p-3">
-              {products && products.length < total && (
+              {products && products.length < total && !products && (
                 <Button
                   appearance="primary"
                   // className="btn btn-warning"
