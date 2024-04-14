@@ -8,16 +8,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { useCart } from "../context/cart";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { Toaster, toast } from "sonner";
 import { Button } from "rsuite";
 
 const CartPage = () => {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
   const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState("");
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
 
   const totalAmount = cart.reduce((amount, item) => item.price + amount, 0);
 
@@ -30,6 +28,7 @@ const CartPage = () => {
       let index = myCart.findIndex((item) => item._id === pid);
       myCart.splice(index, 1);
       setCart(myCart);
+      toast.success("Item has been removed from cart");
       localStorage.setItem("cart", JSON.stringify(myCart));
     } catch (error) {
       console.log(error);
@@ -48,26 +47,6 @@ const CartPage = () => {
   useEffect(() => {
     getToken();
   }, [auth?.token]);
-
-  //handle payments
-  const handlePayment = async () => {
-    try {
-      setLoading(true);
-      const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("/api/v1/product/braintree/payment", {
-        nonce,
-        cart,
-      });
-      setLoading(false);
-      localStorage.removeItem("cart");
-      setCart([]);
-      navigate("/dashboard/user/orders");
-      toast.success("Payment Completed Successfully ");
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
 
   return (
     <Layout>
@@ -108,25 +87,7 @@ const CartPage = () => {
                           </p>
                         </div>
                         <div className="flex flex-1 items-end justify-between text-sm">
-                          {/* <div className="text-gray-500">
-                            <label
-                              htmlFor="quantity"
-                              className="inline mr-5 text-sm font-medium leading-6 text-gray-900"
-                            >
-                              Qty
-                            </label>
-                            <select
-                              // onChange={(e) => handleQuantity(e, item)}
-                              value={item.quantity}
-                            >
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                            </select>
-                          </div> */}
-
+                          
                           <div className="flex">
                             <Button
                               appearance="ghost"

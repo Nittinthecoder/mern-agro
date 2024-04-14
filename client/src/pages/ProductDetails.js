@@ -2,39 +2,34 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import React, { useEffect, useState } from "react";
+import { Slider } from "rsuite";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Layout from "../components/Layout/Layout";
 import { useCart } from "../context/cart";
-import { RadioGroup } from "@headlessui/react";
 
-import { Button, Text } from "rsuite";
+import { Modal, ButtonToolbar, Button, Loader } from "rsuite";
+
+import { Text } from "rsuite";
 import Bargain from "./Bargain";
-import toast from "react-hot-toast";
+import { Toaster, toast } from "sonner";
 
-const products = {
-  sizes: [
-    { name: "XXS", inStock: false },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: true },
-    { name: "2XL", inStock: true },
-    { name: "3XL", inStock: true },
-  ],
-};
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 const ProductDetails = () => {
   const params = useParams();
   // const navigate = useNavigate();
   const [product, setProduct] = useState({});
-  const [selectedSize, setSelectedSize] = useState(products.sizes[1]);
+
   const [cart, setCart] = useCart();
+
+  const [open, setOpen] = React.useState(false);
+  const [rows, setRows] = React.useState(0);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleEntered = () => {
+    setTimeout(() => setRows(80), 2000);
+  };
 
   //getProduct
   const getProduct = async () => {
@@ -55,6 +50,7 @@ const ProductDetails = () => {
 
   return (
     <Layout>
+      <Toaster />
       <div className="flex flex-row justify-around">
         <div>
           <img
@@ -86,15 +82,17 @@ const ProductDetails = () => {
                     Rs {product.price}
                   </Text>
                 </div>
-                <div className="mt-10">
+                <div className="mt-5">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-medium text-gray-900">Size</h3>
+                    <h3 className="text-sm font-medium text-gray-900 mb-2">
+                      Quantity
+                    </h3>
                   </div>
 
-                  <RadioGroup
+                  {/* <RadioGroup
                     value={selectedSize}
                     onChange={setSelectedSize}
-                    className="mt-4"
+                    className="mt-3"
                   >
                     <RadioGroup.Label className="sr-only">
                       Choose a size
@@ -157,20 +155,34 @@ const ProductDetails = () => {
                         </RadioGroup.Option>
                       ))}
                     </div>
-                  </RadioGroup>
+                  </RadioGroup> */}
+
+                  <Slider
+                    progress
+                    defaultValue={0}
+                    onChange={(value) => {
+                      console.log(value);
+                    }}
+                  />
                 </div>
-                <div>
-                  <Bargain />
+                <div className="my-7">
+                  <ButtonToolbar>
+                    <Button appearance="primary" onClick={handleOpen}>
+                      Want to Bargain
+                    </Button>
+                  </ButtonToolbar>
                 </div>
-                <div className="py-2 max-w-[30rem] relative top-[5rem] ">
+                <div className="py-2 max-w-[30rem] relative top-[-1rem] ">
                   <Button
                     onClick={() => {
                       setCart([...cart, product]);
+
                       localStorage.setItem(
                         "cart",
                         JSON.stringify([...cart, product])
                       );
                       toast.success("Product Added to Cart");
+                      console.log(product);
                     }}
                     size="lg"
                     appearance="primary"
@@ -180,6 +192,37 @@ const ProductDetails = () => {
                   </Button>
                 </div>
               </div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                onEntered={handleEntered}
+                onExited={() => {
+                  setRows(0);
+                }}
+              >
+                <Modal.Body>
+                  {rows ? (
+                    <div className="relative">
+                      <div className=" flex flex-col gap-4 items-center">
+                        <Text>TALK TO THE SELLER</Text>
+                        <Bargain />
+                      </div>
+                    </div>
+                  ) : (
+                    <div style={{ textAlign: "center" }}>
+                      <Loader size="md" />
+                    </div>
+                  )}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={handleClose} appearance="primary">
+                    Ok
+                  </Button>
+                  <Button onClick={handleClose} appearance="subtle">
+                    Cancel
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
         </div>

@@ -32,7 +32,7 @@ export const createProductController = async (req, res) => {
         return res.status(500).send({ error: "Category is Required" });
       case !quantity:
         return res.status(500).send({ error: "Quantity is Required" });
-      case photo && photo.size > 2000000:
+      case photo && photo.size > 3000000:
         return res
           .status(500)
           .send({ error: "photo is Required and should be less then 20mb" });
@@ -58,7 +58,6 @@ export const createProductController = async (req, res) => {
     });
   }
 };
-
 //get all products
 export const getProductController = async (req, res) => {
   try {

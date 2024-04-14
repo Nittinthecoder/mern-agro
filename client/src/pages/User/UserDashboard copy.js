@@ -5,7 +5,7 @@ import UserMenu from "../../components/Layout/UserMenu";
 
 export default function UserDashboard() {
   return (
-    <Layout className="relative">
+    <Layout title={"User-Dashboard"} className="relative">
       <div className="absolute top-[10rem]">
         <Heading className="relative top-[-3rem] text-xl left-[9rem]">
           USER DASHBOARD

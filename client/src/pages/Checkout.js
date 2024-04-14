@@ -6,7 +6,7 @@ import { useCart } from "../context/cart";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Layout from "../components/Layout/Layout";
-import { toast } from "sonner";
+import { Toaster, toast } from "sonner";
 
 import DropIn from "braintree-web-drop-in-react";
 
@@ -23,7 +23,7 @@ function Checkout() {
 
   const totalAmount = cart.reduce((amount, item) => item.price + amount, 0);
 
-  console.log(auth);
+
 
   //delete item
   const removeCartItem = (pid) => {
@@ -60,6 +60,7 @@ function Checkout() {
         nonce,
         cart,
       });
+      console.log(cart)
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
@@ -73,6 +74,7 @@ function Checkout() {
 
   return (
     <Layout>
+      <Toaster />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
           <div className="lg:col-span-3">
@@ -148,44 +150,7 @@ function Checkout() {
                   </ul>
 
                   <div className="mt-10 space-y-10">
-                    {/* <fieldset>
-                      <legend className="text-sm font-semibold leading-6 text-gray-900">
-                        Payment Methods
-                      </legend>
-                      <p className="mt-1 text-sm leading-6 text-gray-600">
-                        Choose One
-                      </p>
-                      <div className="mt-6 space-y-6">
-                        <div className="flex items-center gap-x-3">
-                          <input
-                            id="cash"
-                            name="payments"
-                            type="radio"
-                            className="h-4 w-4 border-secondary text-text focus:ring-primary"
-                          />
-                          <label
-                            htmlFor="cash"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Cash
-                          </label>
-                        </div>
-                        <div className="flex items-center gap-x-3">
-                          <input
-                            id="card"
-                            name="payments"
-                            type="radio"
-                            className="h-4 w-4 border-secondary text-text focus:ring-primary"
-                          />
-                          <label
-                            htmlFor="card"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Card Payment
-                          </label>
-                        </div>
-                      </div>
-                    </fieldset> */}
+                    
                     {!clientToken || !cart?.length ? (
                       ""
                     ) : (

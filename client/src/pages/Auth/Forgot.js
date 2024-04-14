@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Button, Text } from "rsuite";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
-import { toast } from "sonner";
+import { Toaster ,toast } from "sonner";
 import axios from "axios";
+import { useAuth } from "../../context/auth";
 
 const Forgot = () => {
+  const [auth] = useAuth();
   const [email, setEmail] = useState("");
   const [answer, setAnswer] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -36,7 +38,8 @@ const Forgot = () => {
 
   return (
     <>
-      <Layout title={"Sign-in"}>
+      <Layout title={"Reset Password"}>
+      <Toaster />
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
@@ -103,7 +106,7 @@ const Forgot = () => {
               </div>
             </form>
 
-            <p className="mt-10 ml-[5rem] text-center flex flex-row text-sm text-text">
+            {!auth?.user && <p className="mt-10 ml-[5rem] text-center flex flex-row text-sm text-text">
               Already a member?{" "}
               <Link
                 to="/login"
@@ -111,7 +114,7 @@ const Forgot = () => {
               >
                 <Text color="green">SIGN IN</Text>
               </Link>
-            </p>
+            </p>}
           </div>
         </div>
       </Layout>

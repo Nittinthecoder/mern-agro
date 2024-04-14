@@ -8,7 +8,7 @@ import axios from "axios";
 
 import Layout from "../../components/Layout/Layout";
 import { useAuth } from "../../context/auth";
-import toast from "react-hot-toast";
+import { Toaster, toast } from "sonner";
 // import { toast } from "sonner";
 // import { toast } from "react-toastify";
 // import toast from "react-hot-toast";
@@ -30,7 +30,7 @@ export function Login() {
         password,
       });
       if (res && res.data.success) {
-        // toast.success(res.data && res.data.message);
+        toast.success(res.data && res.data.message);
         setAuth({
           ...auth,
           user: res.data.user,
@@ -39,17 +39,18 @@ export function Login() {
         localStorage.setItem("auth", JSON.stringify(res.data));
         navigate(location.state || "/");
       } else {
-        // toast.error(res.data.message);
+        toast.error(res.data.message);
       }
     } catch (error) {
       console.log(error);
-      // toast.error("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
   return (
     <>
       <Layout title={"Sign-in"}>
+        <Toaster />
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img

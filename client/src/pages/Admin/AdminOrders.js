@@ -1,18 +1,31 @@
-/* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect, useState } from "react";
-import Layout from "../../components/Layout/Layout";
-import UserMenu from "../../components/Layout/UserMenu";
-import moment from "moment";
-import { FlexboxGrid, Heading } from "rsuite";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Toaster, toast } from "sonner";
+import Layout from "../../components/Layout/Layout";
+import { FlexboxGrid, Heading } from "rsuite";
+import moment from "moment";
+import AdminMenu from "../../components/Layout/AdminMenu";
 import { useAuth } from "../../context/auth";
+import { Select } from "antd";
 
-const Orders = () => {
+const { Option } = Select;
+
+const AdminOrders = () => {
+  const [status, setStatus] = useState([
+    "Pending",
+    "Dispatched",
+    "Delivered",
+    "Cancelled",
+    "Processing",
+  ]);
+  const [changeStatus, setChangeStatus] = useState("");
+
   const [orders, setOrders] = useState([]);
   const [auth] = useAuth();
   const getOrders = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/orders");
+      const { data } = await axios.get("/api/v1/auth/all-orders");
       setOrders(data);
     } catch (error) {
       console.log(error);
@@ -23,34 +36,28 @@ const Orders = () => {
     if (auth?.token) getOrders();
   }, [auth?.token]);
 
-  const chooseColor = (status) => {
-    switch (status) {
-      case "Pending":
-        return "bg-purple-200 text-purple-600";
-      case "Dispatched":
-        return "bg-yellow-200 text-yellow-600";
-      case "Delivered":
-        return "bg-green-200 text-green-600";
-      case "Cancelled":
-        return "bg-red-200 text-red-600";
-      case "Processing":
-        return "bg-blue-200 text-blue-600";
-      default:
-        return "bg-purple-200 text-purple-600";
+  const handleChange = async (orderId, value) => {
+    try {
+      const { data } = await axios.put(`/api/v1/auth/order-status/${orderId}`, {
+        status: value,
+      });
+      getOrders();
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <Layout title={"Your Orders"}>
+    <Layout>
       {/* <Toaster /> */}
       <div className="absolute top-[10rem]">
         <Heading className="relative top-[-3rem] text-xl left-[9rem]">
-          YOUR ORDERS
+          ADMIN ORDERS
         </Heading>
         <div className="relative">
           <FlexboxGrid justify="space-around">
             <FlexboxGrid.Item>
-              <UserMenu />
+              <AdminMenu />
             </FlexboxGrid.Item>
             <div className="absolute top-[-3rem] left-[30rem]">
               <FlexboxGrid.Item>
@@ -134,12 +141,20 @@ const Orders = () => {
                                       </div>
                                     </td>
                                     <td className="py-3 px-6 text-center">
-                                      <span
-                                        className={`${chooseColor(
-                                          o.status
-                                        )} py-1 px-3 rounded-full text-xs`}
-                                      >
-                                        {o.status}
+                                      <span className="bg-purple-200 text-purple-600 py-3 px-3 rounded-full text-xs">
+                                        <Select
+                                          className="w-[9rem]"
+                                          onChange={(value) =>
+                                            handleChange(o._id, value)
+                                          }
+                                          defaultValue={o?.status}
+                                        >
+                                          {status.map((s, i) => (
+                                            <Option key={i} value={s}>
+                                              {s}
+                                            </Option>
+                                          ))}
+                                        </Select>
                                       </span>
                                     </td>
                                     <td className="py-3 px-6 text-center">
@@ -179,4 +194,4 @@ const Orders = () => {
   );
 };
 
-export default Orders;
+export default AdminOrders;

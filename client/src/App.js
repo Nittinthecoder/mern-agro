@@ -12,6 +12,7 @@ import CreateCategory from "./pages/Admin/CreateCategory";
 import CreateProduct from "./pages/Admin/CreateProduct";
 import ViewProduct from "./pages/Admin/ViewProduct ";
 import AdminSet from "./pages/Admin/AdminSet";
+import AdminOrders from "./pages/Admin/AdminOrders";
 import UpdateProduct from "./pages/Admin/UpdateProduct";
 import Orders from "./pages/User/Orders";
 import Profile from "./pages/User/Profile";
@@ -20,6 +21,8 @@ import CartPage from "./pages/CartPage";
 
 import Chat from "./Chat";
 import Checkout from "./pages/Checkout";
+import UpdateAcc from "./pages/User/UpdateAcc";
+import ResetAns from "./pages/User/ResetAns";
 
 function App() {
   return (
@@ -41,6 +44,8 @@ function App() {
           <Route path="" element={<UserDashboard />} />
           <Route path="/userdashboard/profile" element={<Profile />} />
           <Route path="/userdashboard/orders" element={<Orders />} />
+          <Route path="/userdashboard/update-acc" element={<UpdateAcc />} />
+          <Route path="/userdashboard/reset-ans" element={<ResetAns />} />
         </Route>
 
         {/* admin routes */}
@@ -60,6 +65,7 @@ function App() {
             element={<UpdateProduct />}
           />
           <Route path="/admindashboard/admin-set" element={<AdminSet />} />
+          <Route path="/admindashboard/view-orders" element={<AdminOrders />} />
         </Route>
       </Routes>
     </>

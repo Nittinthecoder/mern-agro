@@ -8,13 +8,14 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
+
 import "rsuite/dist/rsuite-no-reset.min.css";
 
 import { Dropdown, Avatar } from "rsuite";
 import { Badge } from "antd";
 
 import { Link } from "react-router-dom";
-// import { toast } from "sonner";
+import { Toaster ,toast } from "sonner";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/cart";
 
@@ -44,7 +45,7 @@ function Header({ children }) {
       token: "",
     });
     localStorage.removeItem("auth");
-    // toaster.success("Logout Successfully");
+    toast.success("Logout Successfully");
   };
 
   // const toaster = useToaster();
@@ -52,6 +53,7 @@ function Header({ children }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="bg-background">
+      <Toaster />
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -204,7 +206,7 @@ function Header({ children }) {
                     <Dropdown.Separator />
                     <div className="flex flex-col px-2 py-3">
                       {auth?.user?.role === 0 && (
-                        <Link to="/userdashboard" className="mb-2">
+                        <Link to="/userdashboard/profile" className="mb-2">
                           {" "}
                           Your profile
                         </Link>
@@ -243,7 +245,11 @@ function Header({ children }) {
                       />
                     </Link>
                     <span className="ml-2 text-sm font-medium text-primary group-hover:text-secondary">
-                    <Badge color="green" count={cart?.length} showZero></Badge>
+                      <Badge
+                        color="green"
+                        count={cart?.length}
+                        showZero
+                      ></Badge>
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>

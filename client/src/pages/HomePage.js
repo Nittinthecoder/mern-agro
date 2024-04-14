@@ -4,18 +4,16 @@ import React, { useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 
 import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Menu, Transition } from "@headlessui/react";
+
 import {
   ChevronDownIcon,
   FunnelIcon,
-  MinusIcon,
-  PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { toast } from "sonner";
+import { Toaster, toast } from "sonner";
 import { Checkbox, Radio } from "antd";
 
 import { Prices } from "../components/Prices.js";
@@ -94,6 +92,7 @@ const HomePage = () => {
       const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts([...products, ...data?.products]);
+      toast.success("Loaded More Products");
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -105,6 +104,7 @@ const HomePage = () => {
     let all = [...checked];
     if (value) {
       all.push(id);
+      toast.success("Product Showing Based on selected Category");
     } else {
       all = all.filter((c) => c !== id);
     }
@@ -126,6 +126,7 @@ const HomePage = () => {
         radio,
       });
       setProducts(data?.products);
+      toast.success("Product Showing Based on selected Price Range");
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +135,7 @@ const HomePage = () => {
   return (
     <Layout>
       <div className=" mt-[-4rem] ">
+        <Toaster />
         <div>
           {/* Mobile filter dialog */}
 
@@ -316,7 +318,7 @@ function ProductGrid({ products, setPage, page, total, loading }) {
           ))}
           <div>
             <div className="m-2 p-3">
-              {products && products.length < total && !products && (
+              {products && products.length < total && (
                 <Button
                   appearance="primary"
                   // className="btn btn-warning"

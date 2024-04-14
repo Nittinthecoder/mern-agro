@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { Button, Text } from "rsuite";
 
-
 import axios from "axios";
-import { toast } from "sonner";
+import { Toaster, toast } from "sonner";
 import Layout from "../../components/Layout/Layout";
 
 // import Alert from "@mui/material/Alert";
@@ -54,6 +53,7 @@ export function Register() {
   return (
     <>
       <Layout>
+        <Toaster />
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <img
