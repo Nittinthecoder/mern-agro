@@ -14,9 +14,7 @@ const Orders = () => {
     try {
       const { data } = await axios.get("/api/v1/auth/orders");
       setOrders(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -84,7 +82,7 @@ const Orders = () => {
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
                               {orders.map((o, i) => {
-                                console.log(o);
+                                
                                 return (
                                   <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left whitespace-nowrap">

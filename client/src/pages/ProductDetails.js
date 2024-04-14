@@ -14,8 +14,6 @@ import { Text } from "rsuite";
 import Bargain from "./Bargain";
 import { Toaster, toast } from "sonner";
 
-
-
 const ProductDetails = () => {
   const params = useParams();
   // const navigate = useNavigate();
@@ -38,9 +36,7 @@ const ProductDetails = () => {
         `/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   //initial details
@@ -157,13 +153,7 @@ const ProductDetails = () => {
                     </div>
                   </RadioGroup> */}
 
-                  <Slider
-                    progress
-                    defaultValue={0}
-                    onChange={(value) => {
-                      console.log(value);
-                    }}
-                  />
+                  <Slider progress defaultValue={0} onChange={(value) => {}} />
                 </div>
                 <div className="my-7">
                   <ButtonToolbar>
@@ -182,7 +172,6 @@ const ProductDetails = () => {
                         JSON.stringify([...cart, product])
                       );
                       toast.success("Product Added to Cart");
-                      console.log(product);
                     }}
                     size="lg"
                     appearance="primary"

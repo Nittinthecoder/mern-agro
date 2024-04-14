@@ -32,7 +32,7 @@ function classNames(...classes) {
 }
 
 const HomePage = () => {
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [setMobileFiltersOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
@@ -48,9 +48,7 @@ const HomePage = () => {
       if (data?.success) {
         setCategories(data?.category);
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -66,7 +64,6 @@ const HomePage = () => {
       setProducts(data.products);
     } catch (error) {
       setLoading(false);
-      console.log(error);
     }
   };
 
@@ -75,9 +72,7 @@ const HomePage = () => {
     try {
       const { data } = await axios.get("/api/v1/product/product-count");
       setTotal(data?.total);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -94,7 +89,6 @@ const HomePage = () => {
       setProducts([...products, ...data?.products]);
       toast.success("Loaded More Products");
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
@@ -127,9 +121,7 @@ const HomePage = () => {
       });
       setProducts(data?.products);
       toast.success("Product Showing Based on selected Price Range");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

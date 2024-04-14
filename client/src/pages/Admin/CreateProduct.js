@@ -20,7 +20,7 @@ const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
+  const [setShipping] = useState("");
   const [photo, setPhoto] = useState("");
 
   //get all category
@@ -31,7 +31,6 @@ const CreateProduct = () => {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong in getting category");
     }
   };
@@ -62,7 +61,6 @@ const CreateProduct = () => {
         navigate("/admindashboard/view-pro");
       }
     } catch (error) {
-      console.log(error);
       toast.error("something went wrong");
     }
   };

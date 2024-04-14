@@ -2,17 +2,15 @@ import { Button } from "rsuite";
 import { Form } from "rsuite";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
-import { useAuth } from "./context/auth";
 
 const AuthPage = (props) => {
-  const [auth, setAuth] = useAuth();
   const onSubmit = (e) => {
     e.preventDefault();
     const { value } = e.target[0];
     axios
       .post("http://localhost:8080/authenticate", { username: value })
-      .then((r) => props.onAuth({ ...r.data, secret: value }))
-      .catch((e) => console.log("error", e));
+      .then((r) => props.onAuth({ ...r.data, secret: value }));
+
     toast.success("YOUR HAVE SUCCESSFULLY JOINED AGROXPLANET CHAT ROOM");
   };
 

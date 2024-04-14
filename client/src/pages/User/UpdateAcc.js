@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import UserMenu from "../../components/Layout/UserMenu";
-import AdminMenu from "../../components/Layout/AdminMenu"
+import AdminMenu from "../../components/Layout/AdminMenu";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
@@ -58,19 +58,22 @@ const UpdateAcc = () => {
         toast.success("Profile Updated Successfully");
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     }
   };
   return (
     <Layout title={"Update ur Acc"}>
       <Toaster />
-      { auth?.user?.role === 0 && <div className="col-md-3">
-        <UserMenu />
-      </div>}
-      { auth?.user?.role === 1 && <div className="col-md-3">
-        <AdminMenu />
-      </div>}
+      {auth?.user?.role === 0 && (
+        <div className="col-md-3">
+          <UserMenu />
+        </div>
+      )}
+      {auth?.user?.role === 1 && (
+        <div className="col-md-3">
+          <AdminMenu />
+        </div>
+      )}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-text">

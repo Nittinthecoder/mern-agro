@@ -23,8 +23,6 @@ function Checkout() {
 
   const totalAmount = cart.reduce((amount, item) => item.price + amount, 0);
 
-
-
   //delete item
   const removeCartItem = (pid) => {
     try {
@@ -33,9 +31,7 @@ function Checkout() {
       myCart.splice(index, 1);
       setCart(myCart);
       localStorage.setItem("cart", JSON.stringify(myCart));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   //get payment gateway token
@@ -43,9 +39,7 @@ function Checkout() {
     try {
       const { data } = await axios.get("/api/v1/product/braintree/token");
       setClientToken(data?.clientToken);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     getToken();
@@ -60,14 +54,13 @@ function Checkout() {
         nonce,
         cart,
       });
-      console.log(cart)
+
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
       navigate("/userdashboard/orders");
       toast.success("Payment Completed Successfully ");
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
@@ -150,7 +143,6 @@ function Checkout() {
                   </ul>
 
                   <div className="mt-10 space-y-10">
-                    
                     {!clientToken || !cart?.length ? (
                       ""
                     ) : (
@@ -234,7 +226,7 @@ function Checkout() {
                 </div>
 
                 <div className="mt-6 flex items-center justify-center ">
-                <Button
+                  <Button
                     className="btn btn-primary"
                     appearance="primary"
                     color="green"

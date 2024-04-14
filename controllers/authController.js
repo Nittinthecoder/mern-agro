@@ -59,7 +59,6 @@ export const registerController = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Errro in Registeration",
@@ -116,7 +115,6 @@ export const loginController = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error in login",
@@ -155,7 +153,6 @@ export const forgotPasswordController = async (req, res) => {
       message: "Password Reset Successfully",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error in forgot password",
@@ -168,45 +165,6 @@ export const forgotPasswordController = async (req, res) => {
 export const testController = async (req, res) => {
   res.send("Protected route");
 };
-
-//update prfole
-// export const updateProfileController = async (req, res) => {
-//   try {
-//     const { name,  password, address, phone, answer, state, pinCode } =
-//       req.body;
-//     const user = await userModel.findById(req.user._id);
-//     //password
-//     if (password && password.length < 6) {
-//       return res.json({ error: "Passsword is required and 6 character long" });
-//     }
-//     const hashedPassword = password ? await hashPassword(password) : undefined;
-//     const updatedUser = await userModel.findByIdAndUpdate(
-//       req.user._id,
-//       {
-//         name: name || user.name,
-//         password: hashedPassword || user.password,
-//         phone: phone || user.phone,
-//         address: address || user.address,
-//         answer: answer || user.answer,
-//         state: state || user.state,
-//         pinCode: pinCode || user.pinCode,
-//       },
-//       { new: true }
-//     );
-//     res.status(200).send({
-//       success: true,
-//       message: "Profile Updated SUccessfully",
-//       updatedUser,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).send({
-//       success: false,
-//       message: "Error WHile Update profile",
-//       error,
-//     });
-//   }
-// };
 
 export const updateProfileController = async (req, res) => {
   try {
@@ -242,7 +200,7 @@ export const updateProfileController = async (req, res) => {
     });
   } catch (error) {
     // error handling...
-    console.log(error);
+
     res.status(400).send({
       success: false,
       message: "Error WHile Update profile",
@@ -260,7 +218,6 @@ export const getOrdersController = async (req, res) => {
       .populate("buyer", "name");
     res.json(orders);
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error WHile Geting Orders",
@@ -277,7 +234,6 @@ export const getAllOrdersController = async (req, res) => {
       .populate("buyer", "name");
     res.json(orders);
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error WHile Geting Orders",
@@ -298,7 +254,6 @@ export const orderStatusController = async (req, res) => {
     );
     res.json(orders);
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       success: false,
       message: "Error While Updating Order",

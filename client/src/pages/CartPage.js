@@ -16,10 +16,9 @@ const CartPage = () => {
   const [cart, setCart] = useCart();
   const [clientToken, setClientToken] = useState("");
 
-
   const totalAmount = cart.reduce((amount, item) => item.price + amount, 0);
 
-  const totalItems = cart.reduce((total, item) => total + item.stock, 0);
+  // const totalItems = cart.reduce((total, item) => total + item.stock, 0);
 
   //delete item
   const removeCartItem = (pid) => {
@@ -30,9 +29,7 @@ const CartPage = () => {
       setCart(myCart);
       toast.success("Item has been removed from cart");
       localStorage.setItem("cart", JSON.stringify(myCart));
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   //get payment gateway token
@@ -40,9 +37,7 @@ const CartPage = () => {
     try {
       const { data } = await axios.get("/api/v1/product/braintree/token");
       setClientToken(data?.clientToken);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     getToken();
@@ -51,6 +46,7 @@ const CartPage = () => {
   return (
     <Layout>
       <div className="bg-background">
+        <Toaster />
         <div>
           <div className="mx-auto  bg-background max-w-7xl px-4 sm:px-6 lg:px-8">
             {cart?.length
@@ -87,7 +83,6 @@ const CartPage = () => {
                           </p>
                         </div>
                         <div className="flex flex-1 items-end justify-between text-sm">
-                          
                           <div className="flex">
                             <Button
                               appearance="ghost"

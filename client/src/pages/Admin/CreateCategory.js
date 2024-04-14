@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, ButtonToolbar, Button, Heading, FlexboxGrid } from "rsuite";
+import { Button, Heading, FlexboxGrid } from "rsuite";
 
 import Layout from "../../components/Layout/Layout";
 import AdminMenu from "../../components/Layout/AdminMenu";
@@ -28,7 +28,6 @@ const CreateCategory = () => {
         toast.error(data.message);
       }
     } catch (error) {
-      console.log(error);
       toast.error("something went wrong in input form");
     }
   };
@@ -41,7 +40,6 @@ const CreateCategory = () => {
         setCategories(data.category);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong in getting category");
     }
   };

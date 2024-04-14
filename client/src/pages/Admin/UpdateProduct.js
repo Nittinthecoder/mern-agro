@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import { Button, ButtonToolbar, FlexboxGrid, Form, Heading } from "rsuite";
@@ -19,7 +20,7 @@ const UpdateProduct = () => {
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [shipping, setShipping] = useState("");
+  const [setShipping] = useState("");
   const [photo, setPhoto] = useState("");
   const [id, setId] = useState("");
 
@@ -37,9 +38,7 @@ const UpdateProduct = () => {
       setQuantity(data.product.quantity);
       setShipping(data.product.shipping);
       setCategory(data.product.category._id);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   useEffect(() => {
     getSingleProduct();
@@ -53,7 +52,6 @@ const UpdateProduct = () => {
         setCategories(data?.category);
       }
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong in getting category");
     }
   };
@@ -84,7 +82,6 @@ const UpdateProduct = () => {
         navigate("/admindashboard/view-pro");
       }
     } catch (error) {
-      console.log(error);
       toast.error("something went wrong");
     }
   };
@@ -100,7 +97,6 @@ const UpdateProduct = () => {
       toast.success("Product DEleted Succesfully");
       navigate("/admindashboard/view-pro");
     } catch (error) {
-      console.log(error);
       toast.error("Something went wrong");
     }
   };

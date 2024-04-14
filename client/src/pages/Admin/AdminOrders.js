@@ -27,9 +27,7 @@ const AdminOrders = () => {
     try {
       const { data } = await axios.get("/api/v1/auth/all-orders");
       setOrders(data);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -42,9 +40,7 @@ const AdminOrders = () => {
         status: value,
       });
       getOrders();
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (
@@ -91,7 +87,6 @@ const AdminOrders = () => {
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
                               {orders.map((o, i) => {
-                                console.log(o);
                                 return (
                                   <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left whitespace-nowrap">
