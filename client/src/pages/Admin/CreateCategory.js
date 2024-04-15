@@ -87,18 +87,18 @@ const CreateCategory = () => {
 
   return (
     <Layout className="relative">
-      <div className="absolute top-[10rem]">
-        <Heading className="relative top-[-3rem] text-xl left-[9rem]">
+      <div className="absolute top-[8rem] lg:top-[10rem] ">
+        <Heading className="relative top-[-3rem] text-xl left-[8rem]">
           CREATE CATEGORY
         </Heading>
         <div className="relative">
           <FlexboxGrid justify="space-around">
-            <FlexboxGrid.Item>
+            <FlexboxGrid.Item className="mt-[-1.4rem] lg:mt-[-.8rem] absolute left-[-1rem]">
               <AdminMenu />
             </FlexboxGrid.Item>
-            <div className="absolute top-[-3rem] left-[30rem]">
+            <div className="absolute lg:left-[30rem] left-[2rem] top-[21rem] lg:top-1">
               <FlexboxGrid.Item>
-                <div>
+                <div className="rounded-md border solid border-lime-500 p-5">
                   <div>
                     <CategoryForm
                       handleSubmit={handleSubmit}
@@ -112,18 +112,18 @@ const CreateCategory = () => {
           </FlexboxGrid>
           <div>
             <FlexboxGrid className="relative" justify="space-around">
-              <div className="absolute top-[9rem] left-[30rem]">
+              <div className="absolute lg:top-[13rem] lg:left-[30rem] top-[34rem] left-[2rem] rounded-md border solid border-lime-500 p-5">
                 <div className="flex flex-row gap-[12rem] mb-5">
-                  <div className="sm:ml-[4rem] lg:ml-[4rem]">NAME</div>
-                  <div className="sm:ml-[-3.6rem]">ACTIONS</div>
+                  <div className="sm:ml-[4rem] lg:ml-[1rem]">NAME</div>
+                  <div className="lg:ml-[-2rem] relative right-5">ACTIONS</div>
                 </div>
                 <div className="flex flex-col">
                   {categories?.map((c) => (
                     <>
-                      <table className="w-full mb-3">
-                        <tr>
-                          <td key={c._id}>{c.name}</td>
-                          <td className="relative left-[5rem]">
+                      <table className="w-full mb-6 lg:mb-9">
+                        <tr >
+                          <td  key={c._id}>{c.name}</td>
+                          <td className="absolute left-[10rem] ">
                             <Button
                               onClick={() => {
                                 setVisible(true);

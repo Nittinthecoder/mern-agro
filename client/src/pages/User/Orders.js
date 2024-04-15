@@ -41,20 +41,21 @@ const Orders = () => {
   return (
     <Layout title={"Your Orders"}>
       {/* <Toaster /> */}
-      <div className="absolute top-[10rem]">
-        <Heading className="relative top-[-3rem] text-xl left-[9rem]">
+      <div className="absolute top-[8rem] lg:top-[10rem]">
+        <Heading className="relative top-[-3rem] text-xl lg:left-[8rem] left-[9.5rem]">
           YOUR ORDERS
         </Heading>
         <div className="relative">
           <FlexboxGrid justify="space-around">
-            <FlexboxGrid.Item>
+            <FlexboxGrid.Item className="mt-[-1.4rem] lg:mt-[-.8rem] absolute lg:left-[-2rem] left-[1rem]">
               <UserMenu />
             </FlexboxGrid.Item>
-            <div className="absolute top-[-3rem] left-[30rem]">
+            <div className="absolute lg:top-[-3rem] lg:left-[30rem] top-[4rem]">
               <FlexboxGrid.Item>
-                <h1>ALL ORDERS</h1>
-
-                <div className="w-[60rem]">
+                <div className="absolute lg:top-[-5rem] lg:left-[25rem] 2xl:left-[28rem] ">
+                  <Heading>Orders</Heading>
+                </div>
+                <div className="w-[60rem] transform lg:rotate-0 rotate-[90deg] relative lg:top-0 top-[32rem] lg:left-[-5rem] 2xl:left-[1rem] left-[9rem] mb-3   ">
                   <div className="overflow-x-auto">
                     <div className="  flex items-center justify-center  font-sans overflow-hidden">
                       <div className="w-full ">
@@ -82,7 +83,6 @@ const Orders = () => {
                             </thead>
                             <tbody className="text-gray-600 text-sm font-light">
                               {orders.map((o, i) => {
-                                
                                 return (
                                   <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left whitespace-nowrap">

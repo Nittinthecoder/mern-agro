@@ -9,6 +9,9 @@ import AdminMenu from "../../components/Layout/AdminMenu";
 import { useAuth } from "../../context/auth";
 import { Select } from "antd";
 
+import { Modal, ButtonToolbar, Button } from 'rsuite';
+import RemindIcon from '@rsuite/icons/legacy/Remind';
+
 const { Option } = Select;
 
 const AdminOrders = () => {
@@ -43,28 +46,33 @@ const AdminOrders = () => {
     } catch (error) {}
   };
 
+  const handleAlert =  () => {
+    toast.success("Please Use a big screen for updating the order status")
+  }
+
   return (
     <Layout>
-      {/* <Toaster /> */}
-      <div className="absolute top-[10rem]">
+      <Toaster />
+      <div className="absolute top-[8rem] lg:top-[10rem]">
         <Heading className="relative top-[-3rem] text-xl left-[9rem]">
           ADMIN ORDERS
         </Heading>
         <div className="relative">
           <FlexboxGrid justify="space-around">
-            <FlexboxGrid.Item>
+            <FlexboxGrid.Item className="mt-[-1.4rem] lg:mt-[-.8rem] absolute left-[-1rem]">
               <AdminMenu />
             </FlexboxGrid.Item>
-            <div className="absolute top-[-3rem] left-[30rem]">
+            <div className="absolute lg:top-[-3rem] lg:left-[30rem] top-[10rem]">
               <FlexboxGrid.Item>
-                <h1>ALL ORDERS</h1>
-
-                <div className="w-[60rem]">
+                <div className="absolute lg:top-[-5rem] lg:left-[25rem] 2xl:left-[28rem] ">
+                  <Heading>Orders</Heading>
+                </div>
+                <div className="w-[60rem] transform lg:rotate-0 rotate-[90deg] relative lg:top-0 top-[30rem] lg:left-[-5rem] 2xl:left-[1rem] left-[9rem] mb-3 ">
                   <div className="overflow-x-auto">
                     <div className="  flex items-center justify-center  font-sans overflow-hidden">
                       <div className="w-full ">
                         <div className=" shadow-md rounded my-6">
-                          <table className=" w-[60rem] table-auto">
+                          <table className=" w-[60rem] table-auto" >
                             <thead>
                               <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th className="py-3 px-6 text-left">#</th>
@@ -137,8 +145,9 @@ const AdminOrders = () => {
                                     </td>
                                     <td className="py-3 px-6 text-center">
                                       <span className="bg-purple-200 text-purple-600 py-3 px-3 rounded-full text-xs">
-                                        <Select
+                                      <Select
                                           className="w-[9rem]"
+                                          onClick={handleAlert}
                                           onChange={(value) =>
                                             handleChange(o._id, value)
                                           }

@@ -73,7 +73,7 @@ function Checkout() {
           <div className="lg:col-span-3">
             <form className=" px-5 py-12 mt-12">
               <div className="space-y-12">
-                <div className="border-b border-primary pb-12">
+                <div className=" pb-12">
                   <h2 className="text-base font-semibold leading-7 text-gray-900">
                     Addresses
                   </h2>
@@ -161,7 +161,7 @@ function Checkout() {
             </form>
           </div>
           <div className="lg:col-span-2">
-            <div className="mx-auto mt-12  max-w-7xl px-0 sm:px-0 lg:px-0">
+            <div className="mx-auto mt-[-5rem] lg:mt-[9rem] max-w-7xl px-0 sm:px-0 lg:px-0">
               <div className="border-t border-text px-4 py-6 sm:px-6">
                 <h1 className="text-4xl my-5 font-bold tracking-tight text-gray-900">
                   Cart

@@ -41,7 +41,7 @@ const AdminMenu = () => {
           </div>
         </FlexboxGrid.Item>
         <FlexboxGrid.Item>
-          <div className="absolute top-[36rem] left-3">
+          <div className="absolute lg:top-[36rem] top-[17.5rem] lg:left-3 left-[2.4rem]">
             <Button onClick={handleOpenACC} color="cyan" appearance="primary">
               Setting
             </Button>

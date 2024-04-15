@@ -82,7 +82,7 @@ const CartPage = () => {
                             {item.description.substring(0, 51)}
                           </p>
                         </div>
-                        <div className="flex flex-1 items-end justify-between text-sm">
+                        <div className="flex flex-1 mt-5 items-end justify-between text-sm">
                           <div className="flex">
                             <Button
                               appearance="ghost"

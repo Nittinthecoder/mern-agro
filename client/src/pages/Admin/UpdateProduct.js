@@ -123,7 +123,7 @@ const UpdateProduct = () => {
                     placeholder="Select a category"
                     size="large"
                     showSearch
-                    className="form-select mb-3"
+                    className=" mb-3 w-[22rem] lg:w-[20rem] rounded-xl "
                     onChange={(value) => {
                       setCategory(value);
                     }}

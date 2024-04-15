@@ -15,11 +15,11 @@ const AuthPage = (props) => {
   };
 
   return (
-    <div className="bg-gray-600  h-[965px] relative">
+    <div className="bg-gray-600  h-[1108px] relative">
       <Toaster />
       <form
         onSubmit={onSubmit}
-        className="absolute bg-gray-400 rounded-3xl flex flex-col items-center p-3 lg:top-[20rem] lg:left-[50rem] "
+        className="absolute bg-gray-400 rounded-3xl flex flex-col items-center p-3 lg:top-[20rem] lg:left-[37rem] 2xl:left-[45rem] top-[20rem] left-[4rem] "
       >
         <div className="form-title">
           Welcome <span className="animate-pulse"> 👋 </span> to AgroXPlanet

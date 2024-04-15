@@ -66,55 +66,51 @@ const Profile = () => {
   return (
     <Layout title={"Your Profile"}>
       <Toaster />
-      <div className="container-fluid m-3 p-3">
-        <Heading className="relative top-[-3rem] text-xl left-[9rem]">
+      <div className="absolute top-[8rem] lg:top-[10rem]">
+        <Heading className="relative top-[-3rem] text-xl lg:left-[8rem] left-[9.5rem]">
           YOUR PROFILE
         </Heading>
-        <div className="row relative">
-          {auth?.user?.role === 0 && (
-            <div className="col-md-3">
-              <UserMenu />
-            </div>
-          )}
-          <div className="absolute left-[30rem]">
-            <List>
-              <List.Item>{auth?.user?.name}</List.Item>
-              <List.Item>{auth?.user?.email}</List.Item>
-              <List.Item>{auth?.user?.phone}</List.Item>
-              <ul role="list" className="w-[40rem]">
-                {auth?.user && (
-                  <div>
-                    <li
-                      // key={address.email}
-                      className="flex justify-between mt-3 gap-x-6 px-5 py-5 border-solid border-2 border-secondary"
-                    >
-                      <div className="flex gap-x-4">
-                        <div className="min-w-0 flex-auto">
-                          <p className="text-sm font-semibold leading-6 text-gray-900">
-                            {auth?.user?.name}
-                          </p>
-                          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                            {auth?.user?.address}
-                          </p>
-                          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                            {auth?.user?.pinCode}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="hidden sm:flex sm:flex-col sm:items-end">
-                        <p className="text-sm leading-6 text-gray-900">
-                          {auth?.user?.phone}
+        <div className="mt-[-1.4rem] lg:mt-[-.8rem] absolute lg:left-[-2rem] left-[1.4rem]">
+          <UserMenu />
+        </div>
+        <div className="absolute lg:left-[30rem] left-[1.5rem] top-[10rem] border solid border-lime-500 rounded-md px-3  lg:top-1">
+          <List>
+            <List.Item>{auth?.user?.name}</List.Item>
+            <List.Item>{auth?.user?.email}</List.Item>
+            <List.Item>{auth?.user?.phone}</List.Item>
+            <ul  className="lg:w-[40rem] w-[23rem] ">
+              {auth?.user && (
+                <div>
+                  <li
+                    // key={address.email}
+                    className="flex justify-between mt-3 gap-x-6 px-5 py-5 "
+                  >
+                    <div className="flex gap-x-4">
+                      <div className="min-w-0 flex-auto">
+                        <p className="text-sm font-semibold leading-6 text-gray-900">
+                          {auth?.user?.name}
                         </p>
-                        <p className="text-sm leading-6 text-gray-500">
-                          {auth?.user?.state}
+                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                          {auth?.user?.address}
+                        </p>
+                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                          {auth?.user?.pinCode}
                         </p>
                       </div>
-                    </li>
-                  </div>
-                )}
-              </ul>
-            </List>
-          </div>
+                    </div>
+                    <div className=" sm:flex sm:flex-col sm:items-end ">
+                      <p className="text-sm leading-6 text-gray-900">
+                        {auth?.user?.phone}
+                      </p>
+                      <p className="text-sm leading-6 text-gray-500">
+                        {auth?.user?.state}
+                      </p>
+                    </div>
+                  </li>
+                </div>
+              )}
+            </ul>
+          </List>
         </div>
       </div>
     </Layout>

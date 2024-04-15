@@ -67,23 +67,23 @@ const CreateProduct = () => {
 
   return (
     <Layout className="relative ">
-      <div className="absolute top-[10rem]">
-        <Heading className="relative top-[-3rem] text-xl left-[9rem]">
+      <div className="absolute top-[8rem] lg:top-[10rem]  lg:h-auto ">
+        <Heading className="relative top-[-3rem] text-xl left-[8rem]">
           CREATE PRODUCT
         </Heading>
         <div className="relative">
           <FlexboxGrid justify="space-around">
-            <FlexboxGrid.Item>
+            <FlexboxGrid.Item className="mt-[-1.4rem] lg:mt-[-.8rem] absolute left-[-1rem]">
               <AdminMenu />
             </FlexboxGrid.Item>
-            <div className="absolute top-[-5rem] left-[30rem]">
+            <div className="absolute lg:left-[30rem] left-[2rem] top-[21rem] lg:top-1">
               <Form>
                 <Form.Group>
                   <Form.ControlLabel>Select Category</Form.ControlLabel>
                   <Select
                     placeholder="Select a category"
                     size="large"
-                    className="form-select mb-3  border solid border-lime-400"
+                    className=" mb-3 w-[22rem] lg:w-[20rem] rounded-xl "
                     onChange={(value) => {
                       setCategory(value);
                     }}
@@ -114,7 +114,7 @@ const CreateProduct = () => {
                         src={URL.createObjectURL(photo)}
                         alt="product_photo"
                         height={"200px"}
-                        className="img img-responsive"
+                        className="img img-responsive w-[30rem] lg:w-[20rem]"
                       />
                     </div>
                   )}
@@ -125,7 +125,7 @@ const CreateProduct = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder=" Type Product Name Here"
-                    className="p-2 mt-3 sm:w-[10rem] rounded-md lg:w-[14rem] border solid border-lime-400 "
+                    className="p-2 mt-3 w-[22rem] rounded-md lg:w-[14rem] border solid border-lime-400 "
                   />
                 </Form.Group>
                 <Form.Group>
@@ -135,7 +135,7 @@ const CreateProduct = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder=" Type Product Description Here"
-                    className="p-2 mt-3 sm:w-[10rem] lg:w-[19rem] border solid border-lime-400"
+                    className="p-2 mt-3 sm:w-[10rem] lg:w-[19rem] rounded-md  border solid border-lime-400"
                   />
                 </Form.Group>
                 <Form.Group>
@@ -156,12 +156,10 @@ const CreateProduct = () => {
                     className="p-2 mt-3 sm:w-[10rem] lg:w-[7rem] rounded-md border solid border-lime-400"
                   />
                 </Form.Group>
-                <Form.Group>
+                {/* <Form.Group>
                   <Select
-                    bordered={false}
                     placeholder="Select Shipping "
                     size="large"
-                    showSearch
                     className="p-2 mt-3  rounded-md border solid border-lime-400"
                     onChange={(value) => {
                       setShipping(value);
@@ -170,8 +168,8 @@ const CreateProduct = () => {
                     <Option value="0">No</Option>
                     <Option value="1">Yes</Option>
                   </Select>
-                </Form.Group>
-                <Form.Group>
+                </Form.Group> */}
+                <Form.Group className="mb-6">
                   <ButtonToolbar>
                     <Button onClick={handleCreate} appearance="primary">
                       Submit

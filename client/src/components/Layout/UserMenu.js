@@ -28,7 +28,7 @@ const UserMenu = () => {
           </div>
         </FlexboxGrid.Item>
         <FlexboxGrid.Item>
-          <div className="absolute top-[36rem] left-3">
+          <div className="absolute lg:top-[36rem] top-[6rem] lg:left-1 left-1">
             <Button onClick={handleOpenACC} color="cyan" appearance="primary">
               Setting
             </Button>
@@ -45,7 +45,7 @@ const UserMenu = () => {
       >
         <Modal.Body>
           {rows ? (
-            <div className="ml-[13rem] ">
+            <div className="ml-[10rem] ">
               <div className="mb-3 ">
                 <Button onClick={handleOpenACC} appearance="primary">
                   <Link to="/userdashboard/update-acc">
@@ -53,12 +53,12 @@ const UserMenu = () => {
                   </Link>
                 </Button>
               </div>
-              <div className="mb-3">
+              <div className="mb-3 ml-[1.5rem]">
                 <Button appearance="primary">
                   <Link to="/forgot">Reset Your Password</Link>
                 </Button>
               </div>
-              <div>
+              <div className="ml-[2rem]">
                 <Button appearance="primary">
                   <Link to="/userdashboard/reset-ans">Reset Your Answer</Link>
                 </Button>

@@ -47,15 +47,16 @@ const ProductDetails = () => {
   return (
     <Layout>
       <Toaster />
-      <div className="flex flex-row justify-around">
-        <div>
+      <div className="flex flex-row justify-around md:px-2 ">
+        <div className="">
           <img
             src={`/api/v1/product/product-photo/${product._id}`}
             alt={product.name}
-            className="h-[40rem] w-full rounded-lg object-cover object-center"
+            className="h-[20rem] w-[25rem] absolute left-[1rem] rounded-lg object-cover object-center lg:w-[40rem] lg:h-[30rem] lg:absolute lg:left-[10rem] lg:top-[10rem]"
+            // className=""
           />
         </div>
-        <div className="relative left-[-22rem] lg:border-l p-4">
+        <div className="relative left-[-2rem] md:left-[-12rem] top-[20rem] lg:top-3 lg:left-[13rem] 2xl:left-[2rem] lg:border-l  p-4">
           <div className="ml-[3rem]">
             <Text as="b" size="2rem" color="green">
               {product.name}
@@ -85,73 +86,7 @@ const ProductDetails = () => {
                     </h3>
                   </div>
 
-                  {/* <RadioGroup
-                    value={selectedSize}
-                    onChange={setSelectedSize}
-                    className="mt-3"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a size
-                    </RadioGroup.Label>
-                    <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                      {products?.sizes?.map((size) => (
-                        <RadioGroup.Option
-                          key={size.name}
-                          value={size}
-                          disabled={!size.inStock}
-                          className={({ active }) =>
-                            classNames(
-                              size.inStock
-                                ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                                : "cursor-not-allowed bg-gray-50 text-gray-200",
-                              active ? "ring-2 ring-lime-400" : "",
-                              "group relative flex items-center justify-center rounded-md border text-sm font-normal uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-2 "
-                            )
-                          }
-                        >
-                          {({ active, checked }) => (
-                            <>
-                              <RadioGroup.Label as="span">
-                                {size.name}
-                              </RadioGroup.Label>
-                              {size.inStock ? (
-                                <span
-                                  className={classNames(
-                                    active ? "border" : "border-2",
-                                    checked
-                                      ? "border-black"
-                                      : "border-transparent",
-                                    "pointer-events-none absolute -inset-px rounded-md"
-                                  )}
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <span
-                                  aria-hidden="true"
-                                  className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                                >
-                                  <svg
-                                    className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                    viewBox="0 0 100 100"
-                                    preserveAspectRatio="none"
-                                    stroke="currentColor"
-                                  >
-                                    <line
-                                      x1={0}
-                                      y1={100}
-                                      x2={100}
-                                      y2={0}
-                                      vectorEffect="non-scaling-stroke"
-                                    />
-                                  </svg>
-                                </span>
-                              )}
-                            </>
-                          )}
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup> */}
+                  
 
                   <Slider progress defaultValue={0} onChange={(value) => {}} />
                 </div>
